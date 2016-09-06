@@ -1,8 +1,8 @@
 #
 # Template for code submission
-# # name     : My name goes here
-# email      : my email goes here
-# date       :
+# name       : Nicholas Stiteler
+# email      : njs74@pitt.edu
+# date       : 9/6/2016
 # class      : CS0008-f2016
 # instructor : Max Novelli (man8@pitt.edu)
 #
