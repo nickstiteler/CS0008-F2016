@@ -1,5 +1,5 @@
 #
-#Template for code submission
+# Template for code submission
 # name       : Nicholas Stiteler
 # email      : njs74@pitt.edu
 # date       :
@@ -7,8 +7,8 @@
 # instructor : Max Novelli (man8@pitt.edu)
 #
 # Description:
-#
-# Example: CH 2 EX 10
+# Description goes here
+# Example:
 3
 # Notes:
 # any notes to the instructor and/or TA goes here
