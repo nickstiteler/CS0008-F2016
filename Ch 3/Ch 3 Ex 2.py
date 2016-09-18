@@ -14,15 +14,17 @@
 # any notes to the instructor and/or TA goes here
 # ...and now let's program with Python
 
-
+# Enter the lengths and widths for each rectangle
 length1 = float(input('Enter First Length'))
 width1 = float(input('Enter First Width'))
 length2 = float(input('Enter Second Length'))
 width2 = float(input('Enter Second Width'))
 
+# Equation for the areas of each rectangle
 area1 = length1*width1
 area2 = length2*width2
 
+# If then for which rectangle has the greatest area
 if(area1>area2):
     print('The first rectangle has the greatest area.')
 elif(area1<area2):
