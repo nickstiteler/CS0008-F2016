@@ -14,9 +14,10 @@
 # any notes to the instructor and/or TA goes here
 # ...and now let's program with Python
 
-
+# input for the age of the person
 age = float(input('Enter the age of the person'))
 
+# if statements and printing of the age classification of the person
 if(age<=1):
     print('The person is an infant')
 elif(age>1 and age<13):
