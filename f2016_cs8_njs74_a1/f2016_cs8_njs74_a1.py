@@ -54,10 +54,10 @@ elif(lit_cons<=10 and lit_cons>8):
 else:
     rating = "Excellent"
 
-print(\t,\t,"USC"\t,"Metric")
-print("Distance______________:"\t,usc_distance,"miles"\t,met_distance,"Km")
-print("Gas___________________:"\t,gallons,"gallons"\t,liters,"liters")
-print("Consumption___________:"\t,usc_cons,"mpg"\t,lit_cons,"l/100Km")
+print("\t","\t","USC","\t","Metric")
+print("Distance______________:"'\t',usc_distance,"miles"'\t',met_distance,"Km")
+print("Gas___________________:"'\t',gallons,"gallons"'\t',liters,"liters")
+print("Consumption___________:"'\t',usc_cons,"mpg"'\t',lit_cons,"l/100Km")
 
 print('Gas Consumption Rating:',rating)
 
