@@ -40,7 +40,7 @@ elif(units==2):
     # Converting from metric units to usc units
     usc_distance = distance*.621371
     gallons = liters*.264172
-    usc_cons = usc_distance/gallons
+    gal_cons = usc_distance/gallons
 
 # if/elif/else for setting what the variable "rating" is equal to
 if(lit_cons>20):
@@ -54,10 +54,10 @@ elif(lit_cons<=10 and lit_cons>8):
 else:
     rating = "Excellent"
 
-print("\t","\t","USC","\t","Metric")
-print("Distance______________:"'\t',usc_distance,"miles"'\t',met_distance,"Km")
-print("Gas___________________:"'\t',gallons,"gallons"'\t',liters,"liters")
-print("Consumption___________:"'\t',usc_cons,"mpg"'\t',lit_cons,"l/100Km")
+print("\t","\t","\t","\t","\t""\t","\t","USC","\t","\t","\t","Metric")
+print("Distance______________:"'\t',format(usc_distance,"10.3f"),"miles"'\t',format(met_distance,"10.3f"),"Km")
+print("Gas___________________:"'\t',format(gallons,"10.3f"),"gallons"'\t',format(liters,"10.3f"),"liters")
+print("Consumption___________:"'\t',format(gal_cons,"10.3f"),"mpg"'\t',format(lit_cons,"10.3f"),"l/100Km")
 
 print('Gas Consumption Rating:',rating)
 
