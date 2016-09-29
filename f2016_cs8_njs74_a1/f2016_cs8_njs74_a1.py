@@ -10,7 +10,7 @@ if (units==1 or units==2):
     print("units accepted")
 else:
     print("ENTER 1 OR 2!!!")
-    exit
+    exit(0)
 
 # Setting variables for the distance and gas
 distance = float(input('Please enter the distance driven'))
@@ -54,11 +54,11 @@ elif(lit_cons<=10 and lit_cons>8):
 else:
     rating = "Excellent"
 
-# Print statements with the required fromat and spacings
-print("\t","\t","\t","\t","\t""\t","\t","USC","\t","\t","\t","Metric")
+# Print statements with the required format and spacings
+print("\t","\t","\t","\t","\t""\t","\t","USC","\t","\t","\t","\t","Metric")
 print("Distance______________:"'\t',format(usc_distance,"10.3f"),"miles"'\t',format(met_distance,"10.3f"),"Km")
 print("Gas___________________:"'\t',format(gallons,"10.3f"),"gallons"'\t',format(liters,"10.3f"),"liters")
-print("Consumption___________:"'\t',format(gal_cons,"10.3f"),"mpg"'\t',format(lit_cons,"10.3f"),"l/100Km")
+print("Consumption___________:"'\t',format(gal_cons,"10.3f"),"mpg"'\t','\t',format(lit_cons,"10.3f"),"l/100Km")
 
 print('Gas Consumption Rating:',rating)
 
