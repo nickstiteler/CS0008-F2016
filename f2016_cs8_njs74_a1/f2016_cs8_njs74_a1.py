@@ -54,6 +54,7 @@ elif(lit_cons<=10 and lit_cons>8):
 else:
     rating = "Excellent"
 
+# Print statements with the required fromat and spacings
 print("\t","\t","\t","\t","\t""\t","\t","USC","\t","\t","\t","Metric")
 print("Distance______________:"'\t',format(usc_distance,"10.3f"),"miles"'\t',format(met_distance,"10.3f"),"Km")
 print("Gas___________________:"'\t',format(gallons,"10.3f"),"gallons"'\t',format(liters,"10.3f"),"liters")
