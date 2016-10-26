@@ -1,0 +1,12 @@
+#
+# Template for code submission
+# name       : Nicholas Stiteler
+# email      : njs74@pitt.edu
+# date       : 10/28/16
+# class      : CS0008-f2016
+# instructor : Max Novelli (man8@pitt.edu)
+#
+# Description: Assignment #2 in the fall semester of 2016
+# Notes/Thought Process:
+
+
