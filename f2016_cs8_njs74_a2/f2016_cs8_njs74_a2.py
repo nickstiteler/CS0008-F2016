@@ -16,7 +16,7 @@ while (case):
         for distance in file_name:
             partial_distance = 0
             for distance in file_name:
-                partial_distance += file_name.split(',')
+                partial_distance = partial_distance.split(',')
             print(partial_distance)
         file_name.close()
 
