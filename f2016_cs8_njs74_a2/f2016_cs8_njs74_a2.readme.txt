@@ -9,4 +9,28 @@
 # Description: Assignment #2 in the fall semester of 2016
 # Notes/Thought Process:
 
+I need to create a file that indefinitely loops till the user has entered the desired number
+of file names.
+
+I then need to use a for loop that will go through and find the number of lines in each file and the distance
+of the file
+
+Next I need to find the total number of line and the total distance of all the files inputted
+
+Finally I need to print in the form:
+
+    File to be read: file_1.csv
+    Partial Total # of lines  : x1
+    Partial distance run      : y1
+
+    File to be read: file_2.csv
+    Partial Total # of lines  : x2
+    Partial distance run      : y2
+
+    File to be read: quit
+
+    Totals
+    Total # of lines          : x1 + x2
+    Total distance run        : y1 + y2
+
 
