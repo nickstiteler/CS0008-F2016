@@ -33,4 +33,6 @@ Finally I need to print in the form:
     Total # of lines          : x1 + x2
     Total distance run        : y1 + y2
 
+Test files: f2016_cs8_a2.data.1.csv     f2016_cs8_a2.data.2.csv
+
 

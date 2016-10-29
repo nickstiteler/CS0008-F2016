@@ -20,24 +20,26 @@ while (case):
         file_name.close()
 
 
-    if (file_name == 'quit' or file_name == 'q'):
-        case = False
 
-    def printKV(key, value,klen=0):
-        KL = max(len(key),klen)
-        if(isinstance(value,str)):
-            FS = '20s'
-        elif isinstance(value,float):
-            FS = '10.3f'
+
+        def printKV(key, value,klen=0):
+            KL = max(len(key),klen)
+            if(isinstance(value,str)):
+                FS = '20s'
+            elif isinstance(value,float):
+                FS = '10.3f'
 
         print(format(key,str(KL)+'s'))
 
         format(value,FS)
 
 
-    def printKV('Partial Total Number of lines',num_line)
+        printKV('Partial Total Number of lines',num_line)
 
-    def printKV('Partial Distance Ran',partial_distance)
+        printKV('Partial Distance Ran',partial_distance)
 
 
     processFile(file_name)
+
+    if (file_name == 'quit' or file_name == 'q'):
+        case = False
