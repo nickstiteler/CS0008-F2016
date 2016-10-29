@@ -1,6 +1,7 @@
 
-totaldistance = 0
-totalline = 0
+total_distance = 0
+total_line = 0
+
 case = True
 while (case):
 
@@ -20,7 +21,11 @@ while (case):
             partial_distance += distance
             numline += 1
 
+            global total_distance
+            global total_line
 
+            total_distance += partial_distance
+            total_line += numline
 
         file_name.close()
 
@@ -35,16 +40,15 @@ while (case):
                 FS = '10.3f'
             printKV('', numline)
             printKV('', partial_distance)
-            totaldistance += partial_distance
-            totalline += numline
-        print(format(key,str(KL)+'s'))
 
-        format(value,FS)
+            print(format(key,str(KL)+'s'))
 
+            format(value,FS)
 
 
 
-    numline,partial_distance = processFile(file_name)
+
+    processFile(file_name)
 
 
     if (file_name == 'quit' or file_name == 'q'):
