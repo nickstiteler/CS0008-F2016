@@ -2,11 +2,15 @@
 total_distance = 0
 total_line = 0
 
+file_name = input('Enter the first file name.')
+
 case = True
 while (case):
 
-    file_name = input('Enter the file name, or enter "quit", "q", or an "empty string" if you have no more files.')
 
+
+    if (file_name == 'quit' or file_name == 'q'):
+        case = False
     def processFile(file_name):
         file_name = open(file_name, 'r')
 
@@ -38,8 +42,8 @@ while (case):
                 FS = '20s'
             elif isinstance(value,float):
                 FS = '10.3f'
-            printKV('', numline)
-            printKV('', partial_distance)
+            print('', numline)
+            print('', partial_distance)
 
             print(format(key,str(KL)+'s'))
 
@@ -47,10 +51,10 @@ while (case):
 
 
 
-
+        printKV(key,value,klen=0)
     processFile(file_name)
 
-
+    file_name = input('Enter the next file, or enter "q" or "quit" if you have no more files.')
     if (file_name == 'quit' or file_name == 'q'):
         case = False
 
