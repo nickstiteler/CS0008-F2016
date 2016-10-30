@@ -36,22 +36,22 @@ while (case):
 
 
 
-        def printKV(key,value,klen=0):
-            KL = max(len(key),klen)
-            if(isinstance(value,str)):
+        def printKV(numline,partial_distance,klen=0):
+            KL = max(len(numline),klen)
+            if(isinstance(partial_distance,str)):
                 FS = '20s'
-            elif isinstance(value,float):
+            elif isinstance(partial_distance,float):
                 FS = '10.3f'
-            print('', numline)
-            print('', partial_distance)
+            print('Partial Total # of lines:', numline)
+            print('Partial distance run', partial_distance)
 
-            print(format(key,str(KL)+'s'))
+            print(format(numline,str(KL)+'s'))
 
-            format(value,FS)
+            format(partial_distance,FS)
 
 
 
-        printKV(key,value,klen=0)
+        printKV(numline,partial_distance,klen=0)
     processFile(file_name)
 
     file_name = input('Enter the next file, or enter "q" or "quit" if you have no more files.')
