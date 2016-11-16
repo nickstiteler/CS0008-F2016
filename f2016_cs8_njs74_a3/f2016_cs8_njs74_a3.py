@@ -94,7 +94,12 @@ def processfile(fh):
 
         ptn += 1
 
+    return [ptn, ptd]
 
+
+td = 0
+
+tn = 0
 
 print('Please enter the name of the first master input file to process.')
 master = input('Master File name : ')
@@ -102,5 +107,10 @@ master = input('Master File name : ')
 while ( master != '' and master != 'quit' and master != 'q' ):
 
     fh = open(master,'r')
+
+    td += ptd
+
+    tn += ptn
+
 
 
