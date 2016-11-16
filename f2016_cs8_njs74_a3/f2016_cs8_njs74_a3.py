@@ -1,6 +1,6 @@
 #
 #
-# name       : Nioholas Stiteler
+# name       : Nicholas Stiteler
 # email      : man8@pitt.edu
 # date       : 11/18/2016
 # class      : CS0008-f2016
@@ -65,5 +65,42 @@
 # In this program, the student should make the best us of everything that has learn so far in this class:
 # functions, for loops, while loops, lists, sets and dictionaries.
 
+
+def terminal_print(key,value,klen = 0):
+
+
+
+totatl_file =
+
+def processfile(fh):
+
+    ptd = 0
+
+    ptn = 0
+
+    for line in fh:
+
+        fh = line.split(',')
+        num_files = len(fh)
+
+        for file in fh:
+
+
+        [name,distance] = line.rstrip('\n').split(',')
+
+        distance = float(distance)
+
+        ptd += distance
+
+        ptn += 1
+
+
+
+print('Please enter the name of the first master input file to process.')
+master = input('Master File name : ')
+
+while ( master != '' and master != 'quit' and master != 'q' ):
+
+    fh = open(master,'r')
 
 
