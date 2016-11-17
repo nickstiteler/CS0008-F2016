@@ -78,11 +78,17 @@ def processfile(file,gd):
 
     file.readline()
 
+    total_distance = 0
+
     for line in file:
 
         count += 1
 
         line = line.rstrip('\n').split(',')
+
+        partial_distance = sum([float(line.rstrip('\n').split(',')[1])for line in file])
+
+        total_distance += partial_distance
 
         key = str(line[0])
 
@@ -92,9 +98,9 @@ def processfile(file,gd):
             gd[key] = gd[key].append(value)
         else:
             gd[key] = [value]
-        file.close
+    file.close
 
-    return[gd,count]
+    return[gd,count,total_distance]
 
 print('Please enter the name of the master input file to process.')
 master = input('Master file name : ')
@@ -114,7 +120,7 @@ print('')
 print('Number of Input files read :',)
 print('Total number of lines read :',)
 print('')
-print('Total distance run',)
+print('Total distance run',fh[2])
 print('')
 print('Max distance run :',)
 print('  by participant :',)
