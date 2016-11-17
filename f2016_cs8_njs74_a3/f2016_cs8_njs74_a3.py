@@ -114,9 +114,17 @@ print('')
 print('Number of Input files read :',)
 print('Total number of lines read :',)
 print('')
-print('Total distance run')
+print('Total distance run',)
 print('')
-
+print('Max distance run :',)
+print('  by participant :',)
+print('')
+print('Min distance run :',)
+print('  by participant :',)
+print('')
+print('Total number of participants :',)
+print('Number of participants')
+print('with multiple records :',)
 
 
 
