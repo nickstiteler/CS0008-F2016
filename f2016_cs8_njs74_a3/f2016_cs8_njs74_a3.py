@@ -66,11 +66,12 @@
 # functions, for loops, while loops, lists, sets and dictionaries.
 
 
+totatl_file = 0
+
+
 def terminal_print(key,value,klen = 0):
 
-
-
-totatl_file =
+    x = 0
 
 def processfile(fh):
 
@@ -78,21 +79,25 @@ def processfile(fh):
 
     ptn = 0
 
-    for line in fh:
+    names = {}
 
-        fh = line.split(',')
-        num_files = len(fh)
+    for line_m in fh:
 
-        for file in fh:
+        [fh] = line_m.rstrip('\n')
 
+        for line in file:
 
-        [name,distance] = line.rstrip('\n').split(',')
+            file = open(file, 'r')
 
-        distance = float(distance)
+            [name,distance] = line.rstrip('\n').split(',')
 
-        ptd += distance
+            dict[names] = dict[names].append(name)
 
-        ptn += 1
+            distance = float(distance)
+
+            ptd += distance
+
+            ptn += 1
 
     return [ptn, ptd]
 
@@ -107,6 +112,7 @@ master = input('Master File name : ')
 while ( master != '' and master != 'quit' and master != 'q' ):
 
     fh = open(master,'r')
+
 
     td += ptd
 
