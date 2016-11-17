@@ -66,18 +66,16 @@
 # functions, for loops, while loops, lists, sets and dictionaries.
 
 
-totatl_file = 0
 
 
-def terminal_print(key,value,klen = 0):
-
-    x = 0
 
 def processfile(fh):
 
     ptd = 0
 
     ptn = 0
+
+    total_file = 0
 
     names = {}
 
@@ -99,6 +97,10 @@ def processfile(fh):
 
             ptn += 1
 
+            total_file += 1
+
+            file.close()
+
     return [ptn, ptd]
 
 
@@ -107,16 +109,24 @@ td = 0
 tn = 0
 
 print('Please enter the name of the first master input file to process.')
-master = input('Master File name : ')
+master = input('Master file name : ')
 
 while ( master != '' and master != 'quit' and master != 'q' ):
 
     fh = open(master,'r')
 
 
+
+    fh.close()
+
+
     td += ptd
 
     tn += ptn
+
+    print('Please enter the name of the next master file or leave empty, enter q or quit if you have no more master '
+          'files.')
+    master = input('Master file name : ')
 
 
 
