@@ -94,12 +94,13 @@ def processfile(file,gd):
             gd[key] = [value]
         file.close
 
-        return[gd,count]
+    return[gd,count]
 
 print('Please enter the name of the master input file to process.')
 master = input('Master file name : ')
 
 file = open(master,'r')
+
 
 for line in file:
 
@@ -108,6 +109,16 @@ for line in file:
     fh = processfile(line,global_dict)
 
     global_dict.update(fh[0])
+
+print('')
+print('Number of Input files read :',)
+print('Total number of lines read :',)
+print('')
+print('Total distance run')
+print('')
+
+
+
 
 
 
