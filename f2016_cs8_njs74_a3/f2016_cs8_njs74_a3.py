@@ -66,7 +66,7 @@
 # functions, for loops, while loops, lists, sets and dictionaries.
 
 
-
+out_file = open("output.txt",'w')
 
 global_dict = {}
 
