@@ -76,6 +76,8 @@ def processfile(file,gd):
 
     count = 0
 
+    file.readline()
+
     for line in file:
 
         count += 1
