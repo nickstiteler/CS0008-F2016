@@ -70,6 +70,30 @@
 
 global_dict = {}
 
+def processfile(file,gd):
+
+    file = open(file,'r')
+
+    count = 0
+
+    for line in file:
+
+        count += 1
+
+        line = line.rstrip('\n').split(',')
+
+        key = str(line[0])
+
+        value = float(line[1])
+
+        if(key in gd):
+            gd[key] = gd[key].append(value)
+        else:
+            gd[key] = [value]
+        file.close
+
+        return[gd,count]
+
 print('Please enter the name of the master input file to process.')
 master = input('Master file name : ')
 
@@ -79,31 +103,10 @@ for line in file:
 
     line = line.rstrip('\n')
 
-    global_dict.update(processfile(line,global_dict))
+    fh = processfile(line,global_dict)
 
-    def processfile(file,gd):
+    global_dict.update(fh[0])
 
-        file = open(file,'r')
-
-        count = 0
-
-        for line in file:
-
-            count += 1
-
-            line = line.rstrip('\n').split(',')
-
-            key = str(line[0])
-
-            value = float(line[1])
-
-            if(key in gd):
-                gd[key] = gd[key].append(value)
-            else:
-                gd[key] = [value]
-            file.close
-
-            return[gd,count]
 
 
 
