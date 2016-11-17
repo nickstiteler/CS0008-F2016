@@ -68,65 +68,43 @@
 
 
 
+global_dict = {}
 
-def processfile(fh):
+print('Please enter the name of the master input file to process.')
+master = input('Master file name : ')
 
-    ptd = 0
+file = open(master,'r')
 
-    ptn = 0
+for line in file:
 
-    total_file = 0
+    line = line.rstrip('\n')
 
-    names = {}
+    global_dict.update(processfile(line,global_dict))
 
-    for line_m in fh:
+    def processfile(file,gd):
 
-        [fh] = line_m.rstrip('\n')
+        file = open(file,'r')
+
+        count = 0
 
         for line in file:
 
-            file = open(file, 'r')
+            count += 1
 
-            [name,distance] = line.rstrip('\n').split(',')
+            line = line.rstrip('\n').split(',')
 
-            dict[names] = dict[names].append(name)
+            key = str(line[0])
 
-            distance = float(distance)
+            value = float(line[1])
 
-            ptd += distance
+            if(key in gd):
+                gd[key] = gd[key].append(value)
+            else:
+                gd[key] = [value]
+            file.close
 
-            ptn += 1
+            return[gd,count]
 
-            total_file += 1
-
-            file.close()
-
-    return [ptn, ptd]
-
-
-td = 0
-
-tn = 0
-
-print('Please enter the name of the first master input file to process.')
-master = input('Master file name : ')
-
-while ( master != '' and master != 'quit' and master != 'q' ):
-
-    fh = open(master,'r')
-
-
-
-    fh.close()
-
-
-    td += ptd
-
-    tn += ptn
-
-    print('Please enter the name of the next master file or leave empty, enter q or quit if you have no more master '
-          'files.')
-    master = input('Master file name : ')
 
 
 
