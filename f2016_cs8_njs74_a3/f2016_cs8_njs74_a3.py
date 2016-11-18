@@ -76,37 +76,41 @@ def processfile(file,gd):
 
     count = 0
 
-    file.readline()
+    partial_distance = 0
 
-    total_distance = 0
+    file.readline()
 
     for line in file:
 
-        count += 1
-
         line = line.rstrip('\n').split(',')
-
-        partial_distance = sum([float(line.rstrip('\n').split(',')[1])for line in file])
-
-        total_distance += partial_distance
 
         key = str(line[0])
 
         value = float(line[1])
 
         if(key in gd):
-            gd[key] = gd[key].append(value)
+            gd[key] = gd[key]+[(value)]
         else:
             gd[key] = [value]
-    file.close
 
-    return[gd,count,total_distance]
+        count += 1
+
+        partial_distance += value
+
+    file.close()
+
+    return[gd,count,partial_distance]
 
 print('Please enter the name of the master input file to process.')
 master = input('Master file name : ')
 
 file = open(master,'r')
 
+files = 0
+
+total_count = 0
+
+total_distance = 0
 
 for line in file:
 
@@ -114,19 +118,53 @@ for line in file:
 
     fh = processfile(line,global_dict)
 
+    files += 1
+
+    total_count += fh[1]
+
+    total_distance += fh[2]
+
     global_dict.update(fh[0])
 
+max_name = ''
+max_dist = 0
+
+for key in global_dict:
+
+    l_values = global_dict[key]
+
+    if(max(l_values)>max_dist):
+        max_dist = max(l_values)
+        max_name = key
+
+min_name = ''
+min_dist = 1000000
+
+for key in global_dict:
+
+    r_values = global_dict[key]
+
+    if(min(r_values)<min_dist):
+        min_dist = min(r_values)
+        min_name = key
+
+for key in global_dict:
+
+
+
+
+
 print('')
-print('Number of Input files read :',)
-print('Total number of lines read :',)
+print('Number of Input files read :',files)
+print('Total number of lines read :',total_count)
 print('')
-print('Total distance run',fh[2])
+print('Total distance run',total_distance)
 print('')
-print('Max distance run :',)
-print('  by participant :',)
+print('Max distance run :',max_dist)
+print('  by participant :',max_name)
 print('')
-print('Min distance run :',)
-print('  by participant :',)
+print('Min distance run :',min_dist)
+print('  by participant :',min_name)
 print('')
 print('Total number of participants :',)
 print('Number of participants')
