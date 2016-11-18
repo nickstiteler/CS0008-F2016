@@ -1,3 +1,5 @@
+Master file name : f2016_cs8_a3.data.txt
+
 Number of Input files read   : 3
 Total number of lines read   : 450
 
@@ -11,4 +13,4 @@ Min distance run             : 0.057889446920667
 
 Total number of participants : 388
 Number of participants
-with multiple records        : 62
+with multiple records        : 60

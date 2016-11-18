@@ -177,12 +177,20 @@ for key in global_dict:
     num_names += 1
 
 # finds how many multiple records there are
-multi_records = total_count - num_names
+multi_records = 0
+for key in global_dict:
+    multi = len(global_dict[key])
+    if(multi>1):
+        multi_records += 1
+
 
 # writes to the output file
 for key in global_dict:
     out_file.write(key)
     out_file.write(',')
+    out_file.write(str(len(global_dict[key])))
+    out_file.write(',')
+    out_file.write(str(global_dict[key])[1:-1])
     out_file.write('\n')
 
 # closes the file
