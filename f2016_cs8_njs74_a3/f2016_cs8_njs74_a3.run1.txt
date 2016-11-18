@@ -1,0 +1,14 @@
+Number of Input files read   : 3
+Total number of lines read   : 450
+
+Total distance run           : 23222.955949718526
+
+Max distance run             : 99.91761010374586
+  by participant             : Roland
+
+Min distance run             : 0.057889446920667
+  by participant             : Alex
+
+Total number of participants : 388
+Number of participants
+with multiple records        : 62
