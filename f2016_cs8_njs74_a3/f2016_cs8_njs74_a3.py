@@ -65,110 +65,145 @@
 # In this program, the student should make the best us of everything that has learn so far in this class:
 # functions, for loops, while loops, lists, sets and dictionaries.
 
-
+# creates new file for the outputs
 out_file = open("output.txt",'w')
 
+# declares the global dict
 global_dict = {}
 
+# defining of the process file
 def processfile(file,gd):
 
+    # opens the file whithin the master
     file = open(file,'r')
 
+    # setting the accumulators
     count = 0
-
     partial_distance = 0
 
+    # reads the first line of the file so the line name,distance is removed
     file.readline()
 
+    # for loop for each line of the file
     for line in file:
 
+        # removes the \n from the line and splits it at the comma
         line = line.rstrip('\n').split(',')
 
+        # sets the key and the value
         key = str(line[0])
-
         value = float(line[1])
 
+        # if else for appending to the dictionary if there are multiple names or just one
         if(key in gd):
             gd[key] = gd[key]+[(value)]
         else:
             gd[key] = [value]
 
+        # counts the number of lines in each file
         count += 1
 
+        # sums up the total distance of the file
         partial_distance += value
 
+    # closes the file
     file.close()
 
+    # returns the dictionary, number of lines, and partial distance of each file
     return[gd,count,partial_distance]
 
+# input for the master file
 print('Please enter the name of the master input file to process.')
 master = input('Master file name : ')
 
+# opens master
 file = open(master,'r')
 
+# sets the variables equal to zero
 files = 0
-
 total_count = 0
-
 total_distance = 0
 
+# for loop for looping through the master
 for line in file:
 
+    # strips master of \n
     line = line.rstrip('\n')
 
+    # calls the process file function
     fh = processfile(line,global_dict)
 
+    # adds the total number of files and adds the total number of lines and distances for each file
     files += 1
-
     total_count += fh[1]
-
     total_distance += fh[2]
 
+    # updates the global dictionary
     global_dict.update(fh[0])
 
+# sets the variables for the max value
 max_name = ''
 max_dist = 0
 
+# for loop for finding the max
 for key in global_dict:
 
+    # sets the variable equal to key in global dict
     l_values = global_dict[key]
 
+    # if for findind the max distance and getting the name for that person
     if(max(l_values)>max_dist):
         max_dist = max(l_values)
         max_name = key
 
+# sets variable for min
 min_name = ''
 min_dist = 1000000
 
+# for loop for finding min
 for key in global_dict:
 
+    #sets the variable equal to key in global dict
     r_values = global_dict[key]
 
+    # if for findind the min distance and getting the name for that person
     if(min(r_values)<min_dist):
         min_dist = min(r_values)
         min_name = key
 
+# finds the number of names of all the files
+num_names = 0
 for key in global_dict:
+    num_names += 1
 
+# finds how many multiple records there are
+multi_records = total_count - num_names
 
+# writes to the output file
+for key in global_dict:
+    out_file.write(key)
+    out_file.write(',')
+    out_file.write('\n')
 
+# closes the file
+file.close
 
-
+# prints the outputs
 print('')
-print('Number of Input files read :',files)
-print('Total number of lines read :',total_count)
+print('Number of Input files read   :',files)
+print('Total number of lines read   :',total_count)
 print('')
-print('Total distance run',total_distance)
+print('Total distance run           :',total_distance)
 print('')
-print('Max distance run :',max_dist)
-print('  by participant :',max_name)
+print('Max distance run             :',max_dist)
+print('  by participant             :',max_name)
 print('')
-print('Min distance run :',min_dist)
-print('  by participant :',min_name)
+print('Min distance run             :',min_dist)
+print('  by participant             :',min_name)
 print('')
-print('Total number of participants :',)
+print('Total number of participants :',num_names)
 print('Number of participants')
-print('with multiple records :',)
+print('with multiple records        :',multi_records)
 
 
 
