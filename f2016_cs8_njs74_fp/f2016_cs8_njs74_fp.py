@@ -82,7 +82,7 @@
 
 
 # creates new file for the outputs
-out_file = open("output.txt",'w')
+output_file = open("f2016_cs8_njs74_fp.data.output.csv",'w')
 
 # declares the global dict
 global_dict = {}
@@ -202,29 +202,39 @@ for key in global_dict:
 
 # writes to the output file
 for key in global_dict:
-    out_file.write(key)
-    out_file.write(',')
-    out_file.write(str(len(global_dict[key])))
-    out_file.write(',')
-    out_file.write(str(global_dict[key])[1:-1])
-    out_file.write('\n')
+    output_file.write(key+','+str(len(global_dict[key]))+','+str(global_dict[key])[1:-1]+'\n')
 
 # closes the file
 file.close
 
+def print_kv(key, value, lenkv=30):
+    if len(key)>lenkv:
+        lenkv = len(key)
+
+    if isinstance(value, float):
+        f_str = '010.5f'
+    elif isinstance(value, int):
+        f_str = '2d'
+    else:
+        f_str = 's'
+    print(format(key, str(lenkv)+'s') + ": " + format(value, f_str))
+    return
+
 # prints the outputs
 print('')
-print('Number of Input files read   :',files)
-print('Total number of lines read   :',total_count)
+print_kv('Number of Input files read   ',files)
+print_kv('Total number of lines read   ',total_count)
 print('')
-print('Total distance run           :',total_distance)
+print_kv('Total distance run           ',total_distance)
 print('')
-print('Max distance run             :',max_dist)
-print('  by participant             :',max_name)
+print_kv('Max distance run             ',max_dist)
+print_kv('  by participant             ',max_name)
 print('')
-print('Min distance run             :',min_dist)
-print('  by participant             :',min_name)
+print_kv('Min distance run             ',min_dist)
+print_kv('  by participant             ',min_name)
 print('')
-print('Total number of participants :',num_names)
+print_kv('Total number of participants ',num_names)
 print('Number of participants')
-print('with multiple records        :',multi_records)
+print_kv('with multiple records        ',multi_records)
+
+# f2016_cs8_fp.data.txt
