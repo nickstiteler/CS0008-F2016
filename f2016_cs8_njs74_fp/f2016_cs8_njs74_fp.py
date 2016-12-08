@@ -244,7 +244,8 @@ class Participant:
         return self.name
 
     def __str__(self):
-        return str('Name :',format(self.name,'-20'),'. Distance Run :',format(self.distance,'-9.4'),' . Runs :',format(self.runs,'4int'))
+        return str('Name :',format(self.name,'-20'),'. Distance Run :',format(self.distance,'9.4f'),\
+                   ' . Runs :',format(self.runs,'4int'))
 
 
 # prints the outputs
