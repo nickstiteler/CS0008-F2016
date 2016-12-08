@@ -220,6 +220,33 @@ def print_kv(key, value, lenkv=30):
     print(format(key, str(lenkv)+'s') + ": " + format(value, f_str))
     return
 
+class Participant:
+    def __init__(self,n,d=0):
+        self.name = n
+        self.distance = 0
+        if(d==0):
+            self.runs = 0
+        else:
+            self.runs = 1
+    def addDistance(self,d):
+        self.distance += d
+        self.runs += 1
+
+    def addDistances(self,ld):
+        for d in ld:
+            self.addDistance(d)
+
+    def getDistances(self):
+        return self.distance
+
+
+    def getName(self):
+        return self.name
+
+    def __str__(self):
+        return str('Name :'format(self.name,-20.3f,self.distance,self.runs)
+
+
 # prints the outputs
 print('')
 print_kv('Number of Input files read   ',files)
