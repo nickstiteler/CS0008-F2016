@@ -229,8 +229,9 @@ class Participant:
         else:
             self.runs = 1
     def addDistance(self,d):
-        self.distance += d
-        self.runs += 1
+        if (d > 0):
+            self.distance += d
+            self.runs += 1
 
     def addDistances(self,ld):
         for d in ld:
@@ -244,8 +245,8 @@ class Participant:
         return self.name
 
     def __str__(self):
-        return str('Name :',format(self.name,'-20'),'. Distance Run :',format(self.distance,'9.4f'),\
-                   ' . Runs :',format(self.runs,'4int'))
+        return str('Name :',format(self.name,'-20s'),'. Distance Run :',format(self.distance,'9.4f'),\
+                   ' . Runs :',format(self.runs,'4d'))
 
 
 # prints the outputs
