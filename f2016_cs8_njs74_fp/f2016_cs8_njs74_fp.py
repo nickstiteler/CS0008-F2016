@@ -236,8 +236,10 @@ output_file.write('name,records,distance\n')
 for name, object in participants.items():
     output_file.write(object.tocsv() + '\n')
 
-# closes the master file
-files.close
+# closes the out file
+output_file.close()
+
+
 
 # Function that is used to format the printed outputs to the correct format
 def print_kv(key, value, lenkv=30):
@@ -269,5 +271,6 @@ print('')
 print_kv('Total number of participants ',participant_total)
 print('Number of participants')
 print_kv('with multiple records        ',multi_records)
+
 
 # f2016_cs8_fp.data.txt
