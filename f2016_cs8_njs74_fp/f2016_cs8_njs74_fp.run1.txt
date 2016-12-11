@@ -1,0 +1,19 @@
+Please enter the name of the master input file to process.
+Master file name : f2016_cs8_fp.data.txt
+
+Number of Input files read    :  3
+Total number of lines read    : 450
+
+Total distance run            : 23222.95595
+
+Max distance run              : 0205.82148
+  by participant              : Glynis
+
+Min distance run              : 0000.05789
+  by participant              : Alex
+
+Total number of participants  : 388
+Number of participants
+with multiple records         : 60
+
+Process finished with exit code 0
