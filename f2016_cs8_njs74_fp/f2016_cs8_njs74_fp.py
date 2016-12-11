@@ -236,8 +236,8 @@ output_file.write('name,records,distance\n')
 for name, object in participants.items():
     output_file.write(object.tocsv() + '\n')
 
-# closes the file
-master.close
+# closes the master file
+files.close
 
 # Function that is used to format the printed outputs to the correct format
 def print_kv(key, value, lenkv=30):
