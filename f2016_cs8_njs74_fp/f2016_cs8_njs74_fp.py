@@ -80,12 +80,15 @@
 # total distance run with 9 digits, decimal point and 4 decimals, and zzzz is the number of runs
 # with 4 digits, no decimals.
 
+# defines the class
 class Participant:
 
+    # sets the initial variables
     name = "unknown"
     distance = 0
     runs = 0
 
+    # initializer function
     def __init__(self,n,d=0):
         self.name = n
         self.distance = 0
@@ -93,35 +96,41 @@ class Participant:
             self.runs = 0
         else:
             self.runs = 1
+    # function that finds the specific distance and adds it to a list
     def addDistance(self,d):
         if (d > 0):
             self.distance += d
             self.runs += 1
-
+    # adds all the distances together
     def addDistances(self,ld):
         for d in ld:
             self.addDistance(d)
 
+    # returns the total distance run
     def getDistances(self):
         return self.distance
 
-
+    # returns the name of the participant
     def getName(self):
         return self.name
 
+    # returns the number of runs
     def getRuns(self):
         return self.runs
 
+    # stringify the object
     def __str__(self):
         return str('Name :',format(self.name,'-20s'),'. Distance Run :',format(self.distance,'9.4f'),\
                    '. Runs :',format(self.runs,'4d'))
 
+    # joins name runs and distance so they can easily be written to the csv file
     def tocsv(self):
         return ','.join([self.name, str(self.runs), str(self.distance)])
 
 # defining of the process file
 def processfile(file):
 
+    # creates the output list
     output = []
 
     # opens the file whithin the master
@@ -130,87 +139,91 @@ def processfile(file):
     # for loop for each line of the file
     for line in file:
 
+        # skips the header line
         if "distance" in line:
-            # skip line
             continue
 
         # removes the \n from the line and splits it at the comma
         temp1 = line.rstrip('\n').split(',')
 
+        # appends the name and distance to the dictionary
         try:
             # append record to output list in the form of a dictionary with 2 keys: name and distance
             # remove unwanted spaces from name and convert distance to float
             output.append({'name': temp1[0].strip(' '), 'distance':float(temp1[1])})
+
+        # skips all the improperly formatted lines
         except:
-            # here we catch all the lines that are incorrectly formatted
-            # and we skipp them too
             print('Invalid row : '+line.rstrip('\n'))
 
     # closes the file
     file.close()
 
-    # returns the dictionary, number of lines, and partial distance of each file
+    # returns the dictionary
     return output
 
 # input for the master file
 print('Please enter the name of the master input file to process.')
 master = input('Master file name : ')
 
-# opens master
-file = open(master,'r')
-
+# strips the '\n' from each line and opens the master
 files = [file.rstrip('\n') for file in open(master,'r')]
 
+# creates a list of all the records from each file
 rawData = sum([processfile(file) for file in files],[])
 
+# finds the number of files read by finding the number of objects in files
 num_files = len(files)
 
+# finds the total number of lines read by looking at tge number of objects in rawData
 num_lines = len(rawData)
 
+# totals everyones distances to find the total distance ran overall
 total_distance = sum([(item['distance']) for item in rawData])
 
+# creates dictionary called participants
 participants = {}
 
 for item in rawData:
-    # check if the names has already been found previously or if it is new
-    # if it is new, initialize elements in the accumulators
+
+    # checks if the name is new or already recorded if it is it adds onto it and adds to the accumulator
     if not item['name'] in participants.keys():
         participants[item['name']] = Participant(item['name'])
-    # insert distance in the list for this participant
     participants[item['name']].addDistance(item['distance'])
 
+# sets the max and min distance variables to zero and an empty string for the name
 min_distance = { 'name' : None, 'distance': None }
-# maximum distance run with name
 max_distance = { 'name' : None, 'distance': None }
 
+# creates the dictionary appearances
 appearances = {}
 
 for name, object in participants.items():
     # get the total distance run by this participant
     distance = object.getDistances()
-    # check if we need to update min
-    # if this is the first iteration or if the current participant distance is lower than the current min
+
+    # finds the min distance by seeing if this is less than the previous distance
     if min_distance['name'] is None or min_distance['distance'] > distance:
         min_distance['name'] = name
         min_distance['distance'] = distance
-    # end if
-    # check if we need to update max
-    # if this is the first iteration or if the current participant distance is lower than the current min
+
+    # finds the max distance by checking to see if the new one is greater than the last
     if max_distance['name'] is None or max_distance['distance'] < distance:
         max_distance['name'] = name
         max_distance['distance'] = distance
-    # end if
-    #
-    # get number of runs, aka appearances from participant object
+
+    # gets the number of appearances of the partcipants
     participant_appearances = object.getRuns()
-    #
+
     # check if we need to initialize this entry
     if not participant_appearances in appearances.keys():
         appearances[participant_appearances] = []
     appearances[participant_appearances].append(name)
 
+# finds the total amount of participants that ran
 participant_total = len(participants)
 
+# finds the number of participants that had multiple runs
 multi_records = len([1 for item in participants.values() if item.getRuns() > 1])
 
 # creates new file for the outputs
@@ -224,9 +237,9 @@ for name, object in participants.items():
     output_file.write(object.tocsv() + '\n')
 
 # closes the file
-file.close
+master.close
 
-
+# Function that is used to format the printed outputs to the correct format
 def print_kv(key, value, lenkv=30):
     if len(key)>lenkv:
         lenkv = len(key)
