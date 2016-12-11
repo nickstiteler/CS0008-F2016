@@ -80,147 +80,12 @@
 # total distance run with 9 digits, decimal point and 4 decimals, and zzzz is the number of runs
 # with 4 digits, no decimals.
 
-
-# creates new file for the outputs
-output_file = open("f2016_cs8_njs74_fp.data.output.csv",'w')
-
-# declares the global dict
-global_dict = {}
-
-# defining of the process file
-def processfile(file,gd):
-
-    # opens the file whithin the master
-    file = open(file,'r')
-
-    # setting the accumulators
-    count = 0
-    partial_distance = 0
-
-    # reads the first line of the file so the line name,distance is removed
-    file.readline()
-
-    # for loop for each line of the file
-    for line in file:
-
-        # removes the \n from the line and splits it at the comma
-        line = line.rstrip('\n').split(',')
-
-        # sets the key and the value
-        key = str(line[0])
-        value = float(line[1])
-
-        # if else for appending to the dictionary if there are multiple names or just one
-        if(key in gd):
-            gd[key] = gd[key]+[(value)]
-        else:
-            gd[key] = [value]
-
-        # counts the number of lines in each file
-        count += 1
-
-        # sums up the total distance of the file
-        partial_distance += value
-
-    # closes the file
-    file.close()
-
-    # returns the dictionary, number of lines, and partial distance of each file
-    return[gd,count,partial_distance]
-
-# input for the master file
-print('Please enter the name of the master input file to process.')
-master = input('Master file name : ')
-
-# opens master
-file = open(master,'r')
-
-# sets the variables equal to zero
-files = 0
-total_count = 0
-total_distance = 0
-
-# for loop for looping through the master
-for line in file:
-
-    # strips master of \n
-    line = line.rstrip('\n')
-
-    # calls the process file function
-    fh = processfile(line,global_dict)
-
-    # adds the total number of files and adds the total number of lines and distances for each file
-    files += 1
-    total_count += fh[1]
-    total_distance += fh[2]
-
-    # updates the global dictionary
-    global_dict.update(fh[0])
-
-# sets the variables for the max value
-max_name = ''
-max_dist = 0
-
-# for loop for finding the max
-for key in global_dict:
-
-    # sets the variable equal to key in global dict
-    l_values = global_dict[key]
-
-    # if for findind the max distance and getting the name for that person
-    if(max(l_values)>max_dist):
-        max_dist = max(l_values)
-        max_name = key
-
-# sets variable for min
-min_name = ''
-min_dist = 1000000
-
-# for loop for finding min
-for key in global_dict:
-
-    #sets the variable equal to key in global dict
-    r_values = global_dict[key]
-
-    # if for findind the min distance and getting the name for that person
-    if(min(r_values)<min_dist):
-        min_dist = min(r_values)
-        min_name = key
-
-# finds the number of names of all the files
-num_names = 0
-for key in global_dict:
-    num_names += 1
-
-# finds how many multiple records there are
-multi_records = 0
-for key in global_dict:
-    multi = len(global_dict[key])
-    if(multi>1):
-        multi_records += 1
-
-
-# writes to the output file
-for key in global_dict:
-    output_file.write(key+','+str(len(global_dict[key]))+','+str(global_dict[key])[1:-1]+'\n')
-
-# closes the file
-file.close
-
-def print_kv(key, value, lenkv=30):
-    if len(key)>lenkv:
-        lenkv = len(key)
-
-    if isinstance(value, float):
-        f_str = '010.5f'
-    elif isinstance(value, int):
-        f_str = '2d'
-    else:
-        f_str = 's'
-    print(format(key, str(lenkv)+'s') + ": " + format(value, f_str))
-    return
-
 class Participant:
+
+    name = "unknown"
+    distance = 0
+    runs = 0
+
     def __init__(self,n,d=0):
         self.name = n
         self.distance = 0
@@ -244,25 +109,151 @@ class Participant:
     def getName(self):
         return self.name
 
+    def getRuns(self):
+        return self.runs
+
     def __str__(self):
         return str('Name :',format(self.name,'-20s'),'. Distance Run :',format(self.distance,'9.4f'),\
-                   ' . Runs :',format(self.runs,'4d'))
+                   '. Runs :',format(self.runs,'4d'))
 
+    def tocsv(self):
+        return ','.join([self.name, str(self.runs), str(self.distance)])
+
+# defining of the process file
+def processfile(file):
+
+    output = []
+
+    # opens the file whithin the master
+    file = open(file,'r')
+
+    # for loop for each line of the file
+    for line in file:
+
+        if "distance" in line:
+            # skip line
+            continue
+
+        # removes the \n from the line and splits it at the comma
+        temp1 = line.rstrip('\n').split(',')
+
+        try:
+            # append record to output list in the form of a dictionary with 2 keys: name and distance
+            # remove unwanted spaces from name and convert distance to float
+            output.append({'name': temp1[0].strip(' '), 'distance':float(temp1[1])})
+        except:
+            # here we catch all the lines that are incorrectly formatted
+            # and we skipp them too
+            print('Invalid row : '+line.rstrip('\n'))
+
+    # closes the file
+    file.close()
+
+    # returns the dictionary, number of lines, and partial distance of each file
+    return output
+
+# input for the master file
+print('Please enter the name of the master input file to process.')
+master = input('Master file name : ')
+
+# opens master
+file = open(master,'r')
+
+files = [file.rstrip('\n') for file in open(master,'r')]
+
+rawData = sum([processfile(file) for file in files],[])
+
+num_files = len(files)
+
+num_lines = len(rawData)
+
+total_distance = sum([(item['distance']) for item in rawData])
+
+participants = {}
+
+for item in rawData:
+    # check if the names has already been found previously or if it is new
+    # if it is new, initialize elements in the accumulators
+    if not item['name'] in participants.keys():
+        participants[item['name']] = Participant(item['name'])
+    # insert distance in the list for this participant
+    participants[item['name']].addDistance(item['distance'])
+
+min_distance = { 'name' : None, 'distance': None }
+# maximum distance run with name
+max_distance = { 'name' : None, 'distance': None }
+
+appearances = {}
+
+for name, object in participants.items():
+    # get the total distance run by this participant
+    distance = object.getDistances()
+    # check if we need to update min
+    # if this is the first iteration or if the current participant distance is lower than the current min
+    if min_distance['name'] is None or min_distance['distance'] > distance:
+        min_distance['name'] = name
+        min_distance['distance'] = distance
+    # end if
+    # check if we need to update max
+    # if this is the first iteration or if the current participant distance is lower than the current min
+    if max_distance['name'] is None or max_distance['distance'] < distance:
+        max_distance['name'] = name
+        max_distance['distance'] = distance
+    # end if
+    #
+    # get number of runs, aka appearances from participant object
+    participant_appearances = object.getRuns()
+    #
+    # check if we need to initialize this entry
+    if not participant_appearances in appearances.keys():
+        appearances[participant_appearances] = []
+    appearances[participant_appearances].append(name)
+
+participant_total = len(participants)
+
+multi_records = len([1 for item in participants.values() if item.getRuns() > 1])
+
+# creates new file for the outputs
+output_file = open("f2016_cs8_njs74_fp.data.output.csv", 'w')
+
+# write header in file
+output_file.write('name,records,distance\n')
+
+# writes to the output file
+for name, object in participants.items():
+    output_file.write(object.tocsv() + '\n')
+
+# closes the file
+file.close
+
+
+def print_kv(key, value, lenkv=30):
+    if len(key)>lenkv:
+        lenkv = len(key)
+
+    if isinstance(value, float):
+        f_str = '010.5f'
+    elif isinstance(value, int):
+        f_str = '2d'
+    else:
+        f_str = 's'
+    print(format(key, str(lenkv)+'s') + ": " + format(value,f_str))
+    return
 
 # prints the outputs
 print('')
-print_kv('Number of Input files read   ',files)
-print_kv('Total number of lines read   ',total_count)
+print_kv('Number of Input files read   ',num_files)
+print_kv('Total number of lines read   ',num_lines)
 print('')
 print_kv('Total distance run           ',total_distance)
 print('')
-print_kv('Max distance run             ',max_dist)
-print_kv('  by participant             ',max_name)
+print_kv('Max distance run             ',max_distance['distance'])
+print_kv('  by participant             ',max_distance['name'])
 print('')
-print_kv('Min distance run             ',min_dist)
-print_kv('  by participant             ',min_name)
+print_kv('Min distance run             ',min_distance['distance'])
+print_kv('  by participant             ',min_distance['name'])
 print('')
-print_kv('Total number of participants ',num_names)
+print_kv('Total number of participants ',participant_total)
 print('Number of participants')
 print_kv('with multiple records        ',multi_records)
 
