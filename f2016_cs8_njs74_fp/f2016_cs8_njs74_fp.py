@@ -120,8 +120,8 @@ class Participant:
 
     # stringify the object
     def __str__(self):
-        return str('Name :',format(self.name,'-20s'),'. Distance Run :',format(self.distance,'9.4f'),\
-                   '. Runs :',format(self.runs,'4d'))
+        return str('Name :',format(self.name,'-20s')+'. Distance Run :',format(self.distance,'9.4f')+\
+                   '. Runs :'+format(self.runs,'4d'))
 
     # joins name runs and distance so they can easily be written to the csv file
     def tocsv(self):
