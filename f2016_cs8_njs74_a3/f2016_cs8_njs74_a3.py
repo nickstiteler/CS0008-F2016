@@ -66,7 +66,9 @@
 # functions, for loops, while loops, lists, sets and dictionaries.
 
 # creates new file for the outputs
-out_file = open("output.txt",'w')
+# MN: respect file naming convention as described in specification/assignment
+#out_file = open("output.txt",'w')
+out_file = open("f2016_cs8_njs74_a3.output.txt",'w')
 
 # declares the global dict
 global_dict = {}
@@ -152,6 +154,7 @@ for key in global_dict:
     l_values = global_dict[key]
 
     # if for findind the max distance and getting the name for that person
+    # MN: here you are working with the maximum run distance fo the participant and not with the total distance run (the you obtain with sum of all the distances run)
     if(max(l_values)>max_dist):
         max_dist = max(l_values)
         max_name = key
@@ -167,6 +170,7 @@ for key in global_dict:
     r_values = global_dict[key]
 
     # if for findind the min distance and getting the name for that person
+    # MN; same as max
     if(min(r_values)<min_dist):
         min_dist = min(r_values)
         min_name = key
@@ -190,7 +194,9 @@ for key in global_dict:
     out_file.write(',')
     out_file.write(str(len(global_dict[key])))
     out_file.write(',')
-    out_file.write(str(global_dict[key])[1:-1])
+    # MN: you had to print the total distance run 
+    #out_file.write(str(global_dict[key])[1:-1])
+    out_file.write(str(sum(global_dict[key])))
     out_file.write('\n')
 
 # closes the file
